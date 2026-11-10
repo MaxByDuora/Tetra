@@ -98158,7 +98158,8 @@ _G.require = function(mod)
 end
 
 -- Run Tetra
-local ok, Tetra = pcall(modules["init"], { WindUI = modules["WindUI"]() })
+local initFn = modules["init"]()
+local ok, Tetra = pcall(initFn, { WindUI = modules["WindUI"]() })
 if not ok then
     error("Tetra: init failed: " .. tostring(Tetra), 0)
 end
