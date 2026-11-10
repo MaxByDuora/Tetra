@@ -104,7 +104,7 @@ local modules = {
         	-- ------------------------------------------------------------------
         	-- Load WindUI (outer window shell) — loaded externally by tetra.lua
         	-- ------------------------------------------------------------------
-        	local WindUI = _G.WindUI
+        	local WindUI = env.WindUI or _G.WindUI
         	if not WindUI or type(WindUI) ~= "table" then
         		warn("Tetra: WindUI not loaded. Ensure src/WindUI.lua is loaded first.")
         		return
@@ -82512,10 +82512,13 @@ end
 -- Run Tetra
 local initFn = requireMod("init")
 if type(initFn) ~= "function" then
-    error("Tetra: init.luau did not return a function", 0)
+    error("Tetra: init.luau did not return a function (got " .. type(initFn) .. "), 0)
 end
 
-local env = {}
-local Tetra = initFn(env)
+local env = { WindUI = _G.WindUI }
+local ok, Tetra = pcall(initFn, env)
+if not ok then
+    error("Tetra: init failed: " .. tostring(Tetra), 0)
+end
 
 return Tetra
