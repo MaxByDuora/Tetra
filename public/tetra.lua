@@ -98159,9 +98159,16 @@ end
 
 -- Run Tetra
 local initFn = modules["init"]()
-local ok, Tetra = pcall(initFn, { WindUI = modules["WindUI"]() })
-if not ok then
-    error("Tetra: init failed: " .. tostring(Tetra), 0)
+if type(initFn) ~= "function" then
+    error("Tetra: init.luau did not return a function (got " .. type(initFn) .. "), 0)
 end
+
+local ok, windui = pcall(modules["WindUI"])
+if not ok then error("Tetra: WindUI failed: " .. tostring(windui), 0) end
+if type(windui) ~= "table" then error("Tetra: WindUI is not a table, got " .. type(windui), 0) end
+
+local env = { WindUI = windui }
+local ok2, Tetra = pcall(initFn, env)
+if not ok2 then error("Tetra: init failed: " .. tostring(Tetra), 0) end
 
 return Tetra
