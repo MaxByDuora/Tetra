@@ -36,7 +36,7 @@ local modules = {
         	_g._tetra_session = true
         
         	-- ------------------------------------------------------------------
-        	// Services
+        	-- Services
         	-- ------------------------------------------------------------------
         	local Players = game:GetService("Players")
         	local RunService = game:GetService("RunService")
@@ -55,7 +55,7 @@ local modules = {
         	local PlayerGui = LocalPlayer and LocalPlayer:WaitForChild("PlayerGui")
         
         	-- ------------------------------------------------------------------
-        	// Shared Tetra state
+        	-- Shared Tetra state
         	-- ------------------------------------------------------------------
         	local _tetraL = {
         		bootAt = os.clock(), version = "Tetra v1.0",
@@ -104,7 +104,7 @@ local modules = {
         	_tetraL.createInstance = createInstance
         
         	-- ------------------------------------------------------------------
-        	// Load WindUI (outer window shell)
+        	-- Load WindUI (outer window shell)
         	-- ------------------------------------------------------------------
         	local WindUI
         	local uiOk = pcall(function()
@@ -119,7 +119,7 @@ local modules = {
         	_g._tetra = _tetraL
         
         	-- ------------------------------------------------------------------
-        	// Load Tetra rebranded UI modules (provide _G._tetra_* compat layer)
+        	-- Load Tetra rebranded UI modules (provide _G._tetra_* compat layer)
         	-- ------------------------------------------------------------------
         	local uiEnv = {
         		_tetraL = _tetraL,
@@ -160,7 +160,7 @@ local modules = {
         	end
         
         	-- ------------------------------------------------------------------
-        	// Create WindUI window — pure liquid glass
+        	-- Create WindUI window - pure liquid glass
         	-- ------------------------------------------------------------------
         	local Window = WindUI:CreateWindow({
         		Title = "Tetra", Author = "Liquid Glass Hub",
@@ -184,7 +184,7 @@ local modules = {
         	_g._tetra_window = Window
         
         	-- ------------------------------------------------------------------
-        	// Expose core globals that modules expect
+        	-- Expose core globals that modules expect
         	-- ------------------------------------------------------------------
         	_G._tetra_window = Window
         	_G._tetra_screen = nil -- WindUI manages its own ScreenGui
@@ -198,7 +198,7 @@ local modules = {
         	_tetraL.notify = _G._tetra_notify
         
         	-- ------------------------------------------------------------------
-        	// Helper functions that tabs/panels/features expect
+        	-- Helper functions that tabs/panels/features expect
         	-- ------------------------------------------------------------------
         	local function makeCard(parent, y, h)
         		local c = createInstance("Frame", {
@@ -361,7 +361,7 @@ local modules = {
         	_tetraL.spamGuard = spamGuard
         
         	-- ------------------------------------------------------------------
-        	// Load core modules (local only, external connections stripped)
+        	-- Load core modules (local only, external connections stripped)
         	-- ------------------------------------------------------------------
         	local coreEnv = {
         		_tetraL = _tetraL, createInstance = createInstance, tween = tween,
@@ -385,7 +385,7 @@ local modules = {
         	end
         
         	-- ------------------------------------------------------------------
-        	// Load tabs — pass WindUI ContainerFrame as `panel`
+        	-- Load tabs - pass WindUI ContainerFrame as `panel`
         	-- ------------------------------------------------------------------
         	local homeTab = Window:Tab({ Title = "Home", Icon = "home" })
         	local settingsTab = Window:Tab({ Title = "Settings", Icon = "settings" })
@@ -431,7 +431,7 @@ local modules = {
         	loadTab("scripts", scriptsTab)
         
         	-- ------------------------------------------------------------------
-        	// Panels (floating tools)
+        	-- Panels (floating tools)
         	-- ------------------------------------------------------------------
         	for _, panelName in ipairs({
         		"aimbot", "esp", "fly", "reanim", "serverhop", "friends", "gamepass",
@@ -447,7 +447,7 @@ local modules = {
         	end
         
         	-- ------------------------------------------------------------------
-        	// Commands
+        	-- Commands
         	-- ------------------------------------------------------------------
         	for _, cmdName in ipairs({
         		"antilag", "character", "exploit", "finalize", "misc", "movement",
@@ -460,7 +460,7 @@ local modules = {
         	end
         
         	-- ------------------------------------------------------------------
-        	// Features (includes SoundCloud music — only external connection kept)
+        	-- Features (includes SoundCloud music - only external connection kept)
         	-- ------------------------------------------------------------------
         	for _, featName in ipairs({
         		"avatar", "artwork", "appleMusic", "coverColor", "fakeBan",
@@ -475,7 +475,7 @@ local modules = {
         	end
         
         	-- ------------------------------------------------------------------
-        	// Decks
+        	-- Decks
         	-- ------------------------------------------------------------------
         	for _, deckName in ipairs({ "settings", "scripts", "players", "music", "home", "commands" }) do
         		local ok, mod = pcall(function() return require("./decks/" .. deckName)(coreEnv) end)
@@ -485,7 +485,7 @@ local modules = {
         	end
         
         	-- ------------------------------------------------------------------
-        	// Apply liquid glass theme
+        	-- Apply liquid glass theme
         	-- ------------------------------------------------------------------
         	task.delay(0.5, function()
         		pcall(function()
@@ -497,7 +497,7 @@ local modules = {
         	end)
         
         	-- ------------------------------------------------------------------
-        	// Notify loaded
+        	-- Notify loaded
         	-- ------------------------------------------------------------------
         	task.delay(1.5, function()
         		if _tetraL.config.notifyEnabled then
