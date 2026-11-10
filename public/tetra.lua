@@ -98158,13 +98158,7 @@ _G.require = function(mod)
 end
 
 -- Run Tetra
-local initFn = requireMod("init")
-if type(initFn) ~= "function" then
-    error("Tetra: init.luau did not return a function (got " .. type(initFn) .. "), 0)
-end
-
-local env = { WindUI = modules["WindUI"]() }
-local ok, Tetra = pcall(initFn, env)
+local ok, Tetra = pcall(modules["init"], { WindUI = modules["WindUI"]() })
 if not ok then
     error("Tetra: init failed: " .. tostring(Tetra), 0)
 end
