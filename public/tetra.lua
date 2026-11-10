@@ -82497,6 +82497,8 @@ _G.require = function(mod)
     if type(mod) == "string" then
         if mod:sub(1,2) == "./" then
             return requireMod(mod:sub(3))
+        elseif mod:sub(1,3) == "../" then
+            return requireMod(mod:sub(3))
         elseif mod:sub(1,4) == "src/" then
             return requireMod(mod:sub(5))
         elseif mod:find(".luau", 1, true) then
