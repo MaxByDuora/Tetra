@@ -3,18 +3,6 @@
 
 local module_cache = {}
 
-local function load_module(name)
-    if module_cache[name] then return module_cache[name] end
-    local src = module_sources[name]
-    if not src then error("Tetra: module not found: " .. name) end
-    local chunk, err = loadstring(src, "@" .. name)
-    if not chunk then error("Tetra: failed to parse " .. name .. ": " .. tostring(err)) end
-    local ok, result = pcall(chunk)
-    if not ok then error("Tetra: module " .. name .. " failed: " .. tostring(result)) end
-    module_cache[name] = result
-    return result
-end
-
 local module_sources = {
     ["init"] = [[=[
 --[[
@@ -98132,13 +98120,23 @@ return aa
 ]=],
 }
 
+local function load_module(name)
+    local src = module_sources[name]
+    if not src then error("Tetra: module not found: " .. name) end
+    local chunk, err = loadstring(src, "@" .. name)
+    if not chunk then error("Tetra: failed to parse " .. name .. ": " .. tostring(err)) end
+    local ok, result = pcall(chunk)
+    if not ok then error("Tetra: module " .. name .. " failed: " .. tostring(result)) end
+    return result
+end
+
 -- Run Tetra
-local initFn = modules["init"]()
+local initFn = load_module("init")
 if type(initFn) ~= "function" then
     error("Tetra: init.luau did not return a function (got " .. type(initFn) .. "), 0)
 end
 
-local env = { WindUI = modules["WindUI"]() }
+local env = { WindUI = load_module("WindUI") }
 local ok, Tetra = pcall(initFn, env)
 if not ok then
     error("Tetra: init failed: " .. tostring(Tetra), 0)
