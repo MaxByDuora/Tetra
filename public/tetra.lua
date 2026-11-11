@@ -16,7 +16,7 @@ local function load_module(name)
 end
 
 local module_sources = {
-    ["init"] = [=[
+    ["init"] = [[=[
 --[[
 	Tetra
 	A source-available Roblox script hub.
@@ -516,7 +516,7 @@ end
 
 
 ]=],
-    ["commands/antilag"] = [=[
+    ["commands/antilag"] = [[=[
 return function(env)
 local _tetraL = env._tetraL
 local reg = env.reg
@@ -676,7 +676,7 @@ end
 
 
 ]=],
-    ["commands/character"] = [=[
+    ["commands/character"] = [[=[
 return function(env)
 local _cs = env._cs
 local _isMobile = env._isMobile
@@ -2174,7 +2174,7 @@ end
 
 
 ]=],
-    ["commands/exploit"] = [=[
+    ["commands/exploit"] = [[=[
 return function(env)
 local _cs = env._cs
 local _tetraL = env._tetraL
@@ -2466,7 +2466,7 @@ end
 
 
 ]=],
-    ["commands/finalize"] = [=[
+    ["commands/finalize"] = [[=[
 return function(env)
 local _tetra_prof = env._tetra_prof
 local cmdReg = env.cmdReg
@@ -2564,7 +2564,7 @@ end
 
 
 ]=],
-    ["commands/misc"] = [=[
+    ["commands/misc"] = [[=[
 return function(env)
 local C = env.C
 local _cs = env._cs
@@ -5841,7 +5841,7 @@ end
 
 
 ]=],
-    ["commands/movement"] = [=[
+    ["commands/movement"] = [[=[
 return function(env)
 local C = env.C
 local _cs = env._cs
@@ -6543,7 +6543,7 @@ end
 
 
 ]=],
-    ["commands/plugins"] = [=[
+    ["commands/plugins"] = [[=[
 return function(env)
 local _cmdCats = env._cmdCats
 local _cs = env._cs
@@ -6978,7 +6978,7 @@ end
 
 
 ]=],
-    ["commands/runner"] = [=[
+    ["commands/runner"] = [[=[
 return function(env)
 local _tetraL = env._tetraL
 local _tetra_profileStore = env._tetra_profileStore
@@ -7354,7 +7354,7 @@ end
 
 
 ]=],
-    ["commands/targets"] = [=[
+    ["commands/targets"] = [[=[
 return function(env)
 local C = env.C
 local _cs = env._cs
@@ -9085,7 +9085,7 @@ end
 
 
 ]=],
-    ["commands/troll"] = [=[
+    ["commands/troll"] = [[=[
 return function(env)
 local C = env.C
 local _cs = env._cs
@@ -10438,7 +10438,7 @@ end
 
 
 ]=],
-    ["core/account"] = [=[
+    ["core/account"] = [[=[
 return function(env)
 local C = env.C
 local _tetraL = env._tetraL
@@ -10546,7 +10546,7 @@ end
 
 
 ]=],
-    ["core/boot"] = [=[
+    ["core/boot"] = [[=[
 return function(env)
 local C = env.C
 local _fab = env._fab
@@ -10680,7 +10680,7 @@ end
 
 
 ]=],
-    ["core/configs"] = [=[
+    ["core/configs"] = [[=[
 return function(env)
 local _tetraL = env._tetraL
 local PATH="Tetra/configs.json"
@@ -10804,7 +10804,7 @@ end
 
 
 ]=],
-    ["core/fpsCap"] = [=[
+    ["core/fpsCap"] = [[=[
 return function(env)
 local _isMobile = env._isMobile
 local _tetraL = env._tetraL
@@ -10908,7 +10908,7 @@ end
 
 
 ]=],
-    ["core/hiddenGui"] = [=[
+    ["core/hiddenGui"] = [[=[
 return function(env)
 local _tetraL = env._tetraL
 	local function _tetra_pcallFn(fn, ...)
@@ -11010,7 +11010,7 @@ end
 
 
 ]=],
-    ["core/http"] = [=[
+    ["core/http"] = [[=[
 --[[
 	Tetra core/http — stubbed.
 	All external HTTP connections cut. SoundCloud music uses its own direct
@@ -11022,7 +11022,7 @@ end
 
 
 ]=],
-    ["core/loader"] = [=[
+    ["core/loader"] = [[=[
 --[[
 	Tetra core/loader — stubbed.
 	Tetra's loadscreen/boot sequence replaced by WindUI window (see init.luau).
@@ -11034,7 +11034,7 @@ end
 
 
 ]=],
-    ["core/socketThrottle"] = [=[
+    ["core/socketThrottle"] = [[=[
 --[[
 	Tetra core/socketThrottle — stubbed.
 	rawth.net WebSocket throttle removed; no external socket connections.
@@ -11045,7 +11045,7 @@ end
 
 
 ]=],
-    ["decks/commands"] = [=[
+    ["decks/commands"] = [[=[
 return function(env)
 local C = env.C
 local _tetraClear = env._tetraClear
@@ -12588,7 +12588,7 @@ end
 
 
 ]=],
-    ["decks/home"] = [=[
+    ["decks/home"] = [[=[
 return function(env)
 local C = env.C
 local _tetraL = env._tetraL
@@ -12969,7 +12969,7 @@ end
 
 
 ]=],
-    ["decks/music"] = [=[
+    ["decks/music"] = [[=[
 return function(env)
 local C = env.C
 local _cs = env._cs
@@ -14347,7 +14347,7 @@ end
 
 
 ]=],
-    ["decks/players"] = [=[
+    ["decks/players"] = [[=[
 return function(env)
 local C = env.C
 local _tetraL = env._tetraL
@@ -14852,7 +14852,7 @@ end
 
 
 ]=],
-    ["decks/plus"] = [=[
+    ["decks/plus"] = [[=[
 return function(env)
 local C = env.C
 local _tetraL = env._tetraL
@@ -15235,7 +15235,7 @@ end
 
 
 ]=],
-    ["decks/scripts"] = [=[
+    ["decks/scripts"] = [[=[
 return function(env)
 local C = env.C
 local _genv = env._genv
@@ -16590,7 +16590,7 @@ end
 
 
 ]=],
-    ["decks/settings"] = [=[
+    ["decks/settings"] = [[=[
 return function(env)
 local C = env.C
 local _isMobile = env._isMobile
@@ -18337,7 +18337,7 @@ end
 
 
 ]=],
-    ["features/appleMusic"] = [=[
+    ["features/appleMusic"] = [[=[
 return function(env)
 local _tetraL = env._tetraL
 	local AM = {dir = "Tetra/AppleMusic", st = {}, art = {}, queue = {}, seq = 0, ack = 0, seenT = nil, seenAt = 0, VERSION = 2, GUIDE = "https://Tetra.pro/applemusic"}
@@ -18892,7 +18892,7 @@ end
 
 
 ]=],
-    ["features/artwork"] = [=[
+    ["features/artwork"] = [[=[
 return function(env)
 local _genv = env._genv
 local createInstance = env.createInstance
@@ -19125,7 +19125,7 @@ end
 
 
 ]=],
-    ["features/avatar"] = [=[
+    ["features/avatar"] = [[=[
 return function(env)
 local _tetraAny = env._tetraAny
 local _tetraL = env._tetraL
@@ -21827,7 +21827,7 @@ end
 
 
 ]=],
-    ["features/coverColor"] = [=[
+    ["features/coverColor"] = [[=[
 return function(env)
 	local floor, max, min, abs, ceil, sqrt = math.floor, math.max, math.min, math.abs, math.ceil, math.sqrt
 	local sbyte, sfind, ssub, sgsub = string.byte, string.find, string.sub, string.gsub
@@ -22450,7 +22450,7 @@ end
 
 
 ]=],
-    ["features/fakeBan"] = [=[
+    ["features/fakeBan"] = [[=[
 return function(env)
 local _tetraL = env._tetraL
 local createInstance = env.createInstance
@@ -22979,7 +22979,7 @@ end
 
 
 ]=],
-    ["features/fly"] = [=[
+    ["features/fly"] = [[=[
 return function(env)
 local _isMobile = env._isMobile
 local _mv = env._mv
@@ -23401,7 +23401,7 @@ end
 
 
 ]=],
-    ["features/freecam"] = [=[
+    ["features/freecam"] = [[=[
 return function(env)
 local _tetraL = env._tetraL
 local runService = env.runService
@@ -23570,7 +23570,7 @@ end
 
 
 ]=],
-    ["features/hatFly"] = [=[
+    ["features/hatFly"] = [[=[
 return function(env)
 local _tetraL = env._tetraL
 local createInstance = env.createInstance
@@ -23809,7 +23809,7 @@ end
 
 
 ]=],
-    ["features/keyframeRecorder"] = [=[
+    ["features/keyframeRecorder"] = [[=[
 return function()
 	local K = { DIR = "Tetra/copied", SAMPLE = 1 / 30, MAX = 60, TEAR = 1024, LOOSE = 64, HELD = 1, ROOTED = 0.35, WINDOW = 1, STILL = 6, SPOOF = 4, JUMP = 10 }
 	K.INDEX = K.DIR .. "/index.json"
@@ -24299,7 +24299,7 @@ end
 
 
 ]=],
-    ["features/lyrics"] = [=[
+    ["features/lyrics"] = [[=[
 return function(env)
 	local LRCLIB = "https://lrclib.net/api"
 	local LY = {cache = {}, waiting = {}}
@@ -24415,7 +24415,7 @@ end
 
 
 ]=],
-    ["features/reanimation"] = [=[
+    ["features/reanimation"] = [[=[
 return function(env)
 local _tetraAny = env._tetraAny
 local _tetraL = env._tetraL
@@ -25939,7 +25939,7 @@ end
 
 
 ]=],
-    ["features/reanimBlend"] = [=[
+    ["features/reanimBlend"] = [[=[
 return function(env)
 local API = env.API
 local S = env.stalkie
@@ -26121,7 +26121,7 @@ end
 
 
 ]=],
-    ["features/reanimMimic"] = [=[
+    ["features/reanimMimic"] = [[=[
 return function(env)
 local API = env.API
     local K = require("./keyframeRecorder")()
@@ -26283,7 +26283,7 @@ end
 
 
 ]=],
-    ["features/reanimPair"] = [=[
+    ["features/reanimPair"] = [[=[
 return function(env)
 local API = env.API
 local S = env.stalkie
@@ -26478,7 +26478,7 @@ end
 
 
 ]=],
-    ["features/reanimTricks"] = [=[
+    ["features/reanimTricks"] = [[=[
 return function(env)
 local API = env.API
 local S = env.stalkie
@@ -27831,7 +27831,7 @@ end
 
 
 ]=],
-    ["features/spotify"] = [=[
+    ["features/spotify"] = [[=[
 return function(env)
 local _tetraL = env._tetraL
 	local SPOTIFY_REDIRECT = "http://127.0.0.1:8888/callback"
@@ -28436,7 +28436,7 @@ end
 
 
 ]=],
-    ["features/superfly"] = [=[
+    ["features/superfly"] = [[=[
 return function(env)
 local _tetraL = env._tetraL
 local createInstance = env.createInstance
@@ -28618,7 +28618,7 @@ end
 
 
 ]=],
-    ["features/targetHud"] = [=[
+    ["features/targetHud"] = [[=[
 return function(env)
 local _cs = env._cs
 local _tetraL = env._tetraL
@@ -28768,7 +28768,7 @@ end
 
 
 ]=],
-    ["panels/aimbot"] = [=[
+    ["panels/aimbot"] = [[=[
 return function(env)
 local C = env.C
 local _cs = env._cs
@@ -29320,7 +29320,7 @@ end
 
 
 ]=],
-    ["panels/animBundle"] = [=[
+    ["panels/animBundle"] = [[=[
 return function(env)
 local C = env.C
 local _cs = env._cs
@@ -29713,7 +29713,7 @@ end
 
 
 ]=],
-    ["panels/asseat"] = [=[
+    ["panels/asseat"] = [[=[
 return function(env)
 local _cs = env._cs
 local _tetraL = env._tetraL
@@ -30069,7 +30069,7 @@ end
 
 
 ]=],
-    ["panels/asseat2"] = [=[
+    ["panels/asseat2"] = [[=[
 return function(env)
 local _cs = env._cs
 local _tetraL = env._tetraL
@@ -30455,7 +30455,7 @@ end
 
 
 ]=],
-    ["panels/automate"] = [=[
+    ["panels/automate"] = [[=[
 return function(env)
 local C = env.C
 local _cs = env._cs
@@ -30773,7 +30773,7 @@ end
 
 
 ]=],
-    ["panels/bang"] = [=[
+    ["panels/bang"] = [[=[
 return function(env)
 local _cs = env._cs
 local _tetraL = env._tetraL
@@ -30853,7 +30853,7 @@ end
 
 
 ]=],
-    ["panels/effects"] = [=[
+    ["panels/effects"] = [[=[
 return function(env)
 local C = env.C
 local _cs = env._cs
@@ -31089,7 +31089,7 @@ end
 
 
 ]=],
-    ["panels/esp"] = [=[
+    ["panels/esp"] = [[=[
 return function(env)
 local _cs = env._cs
 local _tetraL = env._tetraL
@@ -31186,7 +31186,7 @@ end
 
 
 ]=],
-    ["panels/facebang"] = [=[
+    ["panels/facebang"] = [[=[
 return function(env)
 local C = env.C
 local _cs = env._cs
@@ -31539,7 +31539,7 @@ end
 
 
 ]=],
-    ["panels/fakelag"] = [=[
+    ["panels/fakelag"] = [[=[
 return function(env)
 local _cs = env._cs
 local _tetraL = env._tetraL
@@ -31613,7 +31613,7 @@ end
 
 
 ]=],
-    ["panels/fly"] = [=[
+    ["panels/fly"] = [[=[
 return function(env)
 local _cs = env._cs
 local _isMobile = env._isMobile
@@ -31686,7 +31686,7 @@ end
 
 
 ]=],
-    ["panels/friends"] = [=[
+    ["panels/friends"] = [[=[
 return function(env)
 local C = env.C
 local _cs = env._cs
@@ -32236,7 +32236,7 @@ end
 
 
 ]=],
-    ["panels/gamepass"] = [=[
+    ["panels/gamepass"] = [[=[
 return function(env)
 local C = env.C
 local _cs = env._cs
@@ -32777,7 +32777,7 @@ end
 
 
 ]=],
-    ["panels/invisible"] = [=[
+    ["panels/invisible"] = [[=[
 return function(env)
 local C = env.C
 local _cs = env._cs
@@ -32890,7 +32890,7 @@ end
 
 
 ]=],
-    ["panels/player"] = [=[
+    ["panels/player"] = [[=[
 return function(env)
 local C = env.C
 local _cs = env._cs
@@ -33886,7 +33886,7 @@ end
 
 
 ]=],
-    ["panels/radar"] = [=[
+    ["panels/radar"] = [[=[
 return function(env)
 local C = env.C
 local _cs = env._cs
@@ -34057,7 +34057,7 @@ end
 
 
 ]=],
-    ["panels/raknet"] = [=[
+    ["panels/raknet"] = [[=[
 return function(env)
 local _cs = env._cs
 local _tetraL = env._tetraL
@@ -34221,7 +34221,7 @@ end
 
 
 ]=],
-    ["panels/reanim"] = [=[
+    ["panels/reanim"] = [[=[
 return function(env)
 local C = env.C
 local _cs = env._cs
@@ -40096,7 +40096,7 @@ end
 
 
 ]=],
-    ["panels/reanimLayout"] = [=[
+    ["panels/reanimLayout"] = [[=[
 return function(env, state, panel)
 local C = env.C
 local _tetraL = env._tetraL
@@ -43429,7 +43429,7 @@ end
 
 
 ]=],
-    ["panels/rewind"] = [=[
+    ["panels/rewind"] = [[=[
 return function(env)
 local C = env.C
 local _cs = env._cs
@@ -43667,7 +43667,7 @@ end
 
 
 ]=],
-    ["panels/serverhop"] = [=[
+    ["panels/serverhop"] = [[=[
 return function(env)
 local C = env.C
 local _cs = env._cs
@@ -44007,7 +44007,7 @@ end
 
 
 ]=],
-    ["panels/spotify"] = [=[
+    ["panels/spotify"] = [[=[
 return function(env)
 local C = env.C
 local _cs = env._cs
@@ -44136,7 +44136,7 @@ end
 
 
 ]=],
-    ["panels/timestop"] = [=[
+    ["panels/timestop"] = [[=[
 return function(env)
 local _cs = env._cs
 local _tetraL = env._tetraL
@@ -44212,7 +44212,7 @@ end
 
 
 ]=],
-    ["panels/touchFling"] = [=[
+    ["panels/touchFling"] = [[=[
 return function(env)
 local _cs = env._cs
 local _tetraL = env._tetraL
@@ -44307,7 +44307,7 @@ end
 
 
 ]=],
-    ["panels/ugc"] = [=[
+    ["panels/ugc"] = [[=[
 return function(env)
 local C = env.C
 local _cs = env._cs
@@ -45038,7 +45038,7 @@ end
 
 
 ]=],
-    ["panels/vcBypass"] = [=[
+    ["panels/vcBypass"] = [[=[
 return function(env)
 local C = env.C
 local _cs = env._cs
@@ -45680,7 +45680,7 @@ end
 
 
 ]=],
-    ["panels/zip"] = [=[
+    ["panels/zip"] = [[=[
 return function(env)
 local C = env.C
 local _cs = env._cs
@@ -45793,7 +45793,7 @@ end
 
 
 ]=],
-    ["tabs/commands"] = [=[
+    ["tabs/commands"] = [[=[
 return function(env, panel)
 local C = env.C
 local _cs = env._cs
@@ -47757,7 +47757,7 @@ end
 
 
 ]=],
-    ["tabs/home"] = [=[
+    ["tabs/home"] = [[=[
 return function(env, panel)
 local C = env.C
 local _genv = env._genv
@@ -47924,7 +47924,7 @@ end
 
 
 ]=],
-    ["tabs/music"] = [=[
+    ["tabs/music"] = [[=[
 return function(env, panel)
 local C = env.C
 local _cs = env._cs
@@ -53382,7 +53382,7 @@ end
 
 
 ]=],
-    ["tabs/playerlist"] = [=[
+    ["tabs/playerlist"] = [[=[
 return function(env)
 local C = env.C
 local _tetraL = env._tetraL
@@ -54167,7 +54167,7 @@ end
 
 
 ]=],
-    ["tabs/plus"] = [=[
+    ["tabs/plus"] = [[=[
 return function(env)
 local C = env.C
 local _tetraL = env._tetraL
@@ -55047,7 +55047,7 @@ end
 
 
 ]=],
-    ["tabs/scripts"] = [=[
+    ["tabs/scripts"] = [[=[
 return function(env, panel)
 local C = env.C
 local _genv = env._genv
@@ -56138,7 +56138,7 @@ end
 
 
 ]=],
-    ["tabs/settings"] = [=[
+    ["tabs/settings"] = [[=[
 return function(env, panel)
 local C = env.C
 local _isMobile = env._isMobile
@@ -56737,7 +56737,7 @@ end
 
 
 ]=],
-    ["tabs/settingsWallpaper"] = [=[
+    ["tabs/settingsWallpaper"] = [[=[
 return function(env, scroll, startY)
 local C = env.C
 local _tetraL = env._tetraL
@@ -57226,7 +57226,7 @@ end
 
 
 ]=],
-    ["ui/commandBar"] = [=[
+    ["ui/commandBar"] = [[=[
 return function(env)
 local C = env.C
 local _tetraL = env._tetraL
@@ -57879,7 +57879,7 @@ end
 
 
 ]=],
-    ["ui/commandIcons"] = [=[
+    ["ui/commandIcons"] = [[=[
 return function(env)
 	local ICONS = {
 		fly = "airplane", togglefly = "airplane", flyspeed = "takeoff", superfly = "rocket", hatfly = "hatgrad", helicopter = "rotate",
@@ -57976,7 +57976,7 @@ end
 
 
 ]=],
-    ["ui/deckShell"] = [=[
+    ["ui/deckShell"] = [[=[
 return function(env)
 local C = env.C
 local _isMobile = env._isMobile
@@ -59120,7 +59120,7 @@ end
 
 
 ]=],
-    ["ui/dynamicIsland"] = [=[
+    ["ui/dynamicIsland"] = [[=[
 return function(env)
 local _tetraL = env._tetraL
 local createInstance = env.createInstance
@@ -62460,7 +62460,7 @@ end
 
 
 ]=],
-    ["ui/fades"] = [=[
+    ["ui/fades"] = [[=[
 return function(env)
 local _tetraAny = env._tetraAny
 local runService = env.runService
@@ -62653,7 +62653,7 @@ end
 
 
 ]=],
-    ["ui/floatingPanel"] = [=[
+    ["ui/floatingPanel"] = [[=[
 return function(env, w, h, anchorX, anchorY)
 local C = env.C
 local _fixedPanels = env._fixedPanels
@@ -62889,7 +62889,7 @@ end
 
 
 ]=],
-    ["ui/gameDetection"] = [=[
+    ["ui/gameDetection"] = [[=[
 return function(env)
 local C = env.C
 local _tetraL = env._tetraL
@@ -63169,7 +63169,7 @@ end
 
 
 ]=],
-    ["ui/glass"] = [=[
+    ["ui/glass"] = [[=[
 return function(env)
 	local TINT_SAT, RIM_SAT, RIM_LIFT, BANNER_SAT = 0.35, 0.45, 0.85, 0.5
 	local TONE_SAT = 0.4
@@ -63451,7 +63451,7 @@ end
 
 
 ]=],
-    ["ui/glassSlider"] = [=[
+    ["ui/glassSlider"] = [[=[
 return function(env)
 local createInstance = env.createInstance
 local tween = env.tween
@@ -63734,7 +63734,7 @@ end
 
 
 ]=],
-    ["ui/haptics"] = [=[
+    ["ui/haptics"] = [[=[
 return function(env)
 local container = env.container
 local userInputService = env.userInputService
@@ -63812,7 +63812,7 @@ end
 
 
 ]=],
-    ["ui/hideRobloxUi"] = [=[
+    ["ui/hideRobloxUi"] = [[=[
 return function(env)
 local _tetraL = env._tetraL
 	local wrap = _tetraL.wrap
@@ -63982,7 +63982,7 @@ end
 
 
 ]=],
-    ["ui/icons"] = [=[
+    ["ui/icons"] = [[=[
 return function(env)
 local _tetraL = env._tetraL
 local _safeLoadstring = env._safeLoadstring
@@ -64135,7 +64135,7 @@ end
 
 
 ]=],
-    ["ui/inlineMusic"] = [=[
+    ["ui/inlineMusic"] = [[=[
 return function(env, panel, library, nowPlaying, header, subtitle, onOpen)
 local C = env.C
 local createInstance = env.createInstance
@@ -64343,7 +64343,7 @@ end
 
 
 ]=],
-    ["ui/intro"] = [=[
+    ["ui/intro"] = [[=[
 return function(env, replay)
 local C = env.C
 local _isMobile = env._isMobile
@@ -65289,7 +65289,7 @@ end
 
 
 ]=],
-    ["ui/islandBar"] = [=[
+    ["ui/islandBar"] = [[=[
 return function(Cards, env)
  local isl, conns, spring, ease, createInstance, _tetraL = env.isl, env.conns, env.spring, env.ease, env.createInstance, env._tetraL
  local WHITE, SUBTLE = env.WHITE, env.SUBTLE
@@ -66034,7 +66034,7 @@ end
 
 
 ]=],
-    ["ui/islandCards"] = [=[
+    ["ui/islandCards"] = [[=[
 return function(env)
  local FX, isl, conns, spring, ease = env.FX, env.isl, env.conns, env.spring, env.ease
  local createInstance = env.createInstance
@@ -67444,7 +67444,7 @@ end
 
 
 ]=],
-    ["ui/islandKinds/alert"] = [=[
+    ["ui/islandKinds/alert"] = [[=[
 return function(Cards, env)
  local _tetraL = env._tetraL
  local A = {
@@ -67553,7 +67553,7 @@ end
 
 
 ]=],
-    ["ui/islandKinds/autoexec"] = [=[
+    ["ui/islandKinds/autoexec"] = [[=[
 return function(Cards, env)
  local _tetraL = env._tetraL
  local CORAL = Color3.fromRGB(255, 96, 96)
@@ -67725,7 +67725,7 @@ end
 
 
 ]=],
-    ["ui/islandKinds/bind"] = [=[
+    ["ui/islandKinds/bind"] = [[=[
 return function(Cards, env)
  local _tetraL, createInstance, spring, ease = env._tetraL, env.createInstance, env.spring, env.ease
  local WHITE, SUBTLE = env.WHITE, env.SUBTLE
@@ -68246,7 +68246,7 @@ end
 
 
 ]=],
-    ["ui/islandKinds/friend"] = [=[
+    ["ui/islandKinds/friend"] = [[=[
 return function(Cards, env)
  local _tetraL = env._tetraL
  local F = {HOLD = 5}
@@ -68271,7 +68271,7 @@ end
 
 
 ]=],
-    ["ui/islandKinds/target"] = [=[
+    ["ui/islandKinds/target"] = [[=[
 return function(Cards, env)
  local _tetraL, conns = env._tetraL, env.conns
  local Players = game:GetService("Players")
@@ -68543,7 +68543,7 @@ end
 
 
 ]=],
-    ["ui/islandKinds/toggles"] = [=[
+    ["ui/islandKinds/toggles"] = [[=[
 return function(Cards, env)
  local isl, conns, spring, ease, _tetraL = env.isl, env.conns, env.spring, env.ease, env._tetraL
  local createInstance = env.createInstance
@@ -69538,7 +69538,7 @@ end
 
 
 ]=],
-    ["ui/islandKinds/value"] = [=[
+    ["ui/islandKinds/value"] = [[=[
 return function(Cards, env)
  local _tetraL, isl, conns = env._tetraL, env.isl, env.conns
  local uis = game:GetService("UserInputService")
@@ -69843,7 +69843,7 @@ end
 
 
 ]=],
-    ["ui/islandKinds/voice"] = [=[
+    ["ui/islandKinds/voice"] = [[=[
 return function(Cards, env)
  local CORAL = Color3.fromRGB(255, 96, 96)
  local V = {
@@ -70914,7 +70914,7 @@ end
 
 
 ]=],
-    ["ui/islandRow"] = [=[
+    ["ui/islandRow"] = [[=[
 return function(Cards, env)
  local isl, spring, ease, createInstance, Q, an = env.isl, env.spring, env.ease, env.createInstance, env.Q, env.an
  local WHITE = env.WHITE
@@ -71452,7 +71452,7 @@ end
 
 
 ]=],
-    ["ui/keybindRow"] = [=[
+    ["ui/keybindRow"] = [[=[
 return function(env, parent, yOffset, label, defaultKey, onChange, clearOnEscape, allowMouse)
 local C = env.C
 local _tetraL = env._tetraL
@@ -71596,7 +71596,7 @@ end
 
 
 ]=],
-    ["ui/lyricFlow"] = [=[
+    ["ui/lyricFlow"] = [[=[
 return function(env)
 local createInstance = env.createInstance
 	local F = {}
@@ -71998,7 +71998,7 @@ end
 
 
 ]=],
-    ["ui/menu"] = [=[
+    ["ui/menu"] = [[=[
 return function(env)
 local C = env.C
 local ICONS = env.ICONS
@@ -73293,7 +73293,7 @@ end
 
 
 ]=],
-    ["ui/microKit"] = [=[
+    ["ui/microKit"] = [[=[
 return function(env)
 local C = env.C
 local createInstance = env.createInstance
@@ -74206,7 +74206,7 @@ end
 
 
 ]=],
-    ["ui/notifications"] = [=[
+    ["ui/notifications"] = [[=[
 return function(env)
 local C = env.C
 local _isMobile = env._isMobile
@@ -75195,7 +75195,7 @@ end
 
 
 ]=],
-    ["ui/nvPop"] = [=[
+    ["ui/nvPop"] = [[=[
 return function(env)
 local C = env.C
 local createInstance = env.createInstance
@@ -75428,7 +75428,7 @@ end
 
 
 ]=],
-    ["ui/opacity"] = [=[
+    ["ui/opacity"] = [[=[
 return function(env)
 local _globalBg = env._globalBg
 local _globalOv = env._globalOv
@@ -75707,7 +75707,7 @@ end
 
 
 ]=],
-    ["ui/panelDrag"] = [=[
+    ["ui/panelDrag"] = [[=[
 return function(env, pnl, bar, onMove, onDragStart, onDragEnd)
 local _cs = env._cs
 local runService = env.runService
@@ -75849,7 +75849,7 @@ end
 
 
 ]=],
-    ["ui/panelKit"] = [=[
+    ["ui/panelKit"] = [[=[
 return function(env)
 local C = env.C
 local createInstance = env.createInstance
@@ -76093,7 +76093,7 @@ end
 
 
 ]=],
-    ["ui/panelPlacement"] = [=[
+    ["ui/panelPlacement"] = [[=[
 return function(env, pnl)
 local _fixedPanels = env._fixedPanels
 local _tetraL = env._tetraL
@@ -76282,7 +76282,7 @@ end
 
 
 ]=],
-    ["ui/panelTitleBar"] = [=[
+    ["ui/panelTitleBar"] = [[=[
 return function(env, pnl, title, onClose)
 local C = env.C
 local _tetraFloatCloseRest = env._tetraFloatCloseRest
@@ -76939,7 +76939,7 @@ end
 
 
 ]=],
-    ["ui/placeWindowPrompt"] = [=[
+    ["ui/placeWindowPrompt"] = [[=[
 return function(env, pnl, showAt)
 local _tetraL = env._tetraL
 local runService = env.runService
@@ -77205,7 +77205,7 @@ end
 
 
 ]=],
-    ["ui/popKit"] = [=[
+    ["ui/popKit"] = [[=[
 return function(env)
 local C = env.C
 local createInstance = env.createInstance
@@ -77513,7 +77513,7 @@ end
 
 
 ]=],
-    ["ui/promo"] = [=[
+    ["ui/promo"] = [[=[
 return function(env)
 local _tetraL = env._tetraL
 local createInstance = env.createInstance
@@ -78077,7 +78077,7 @@ end
 
 
 ]=],
-    ["ui/robloxUi"] = [=[
+    ["ui/robloxUi"] = [[=[
 return function(env)
 local _tetraL = env._tetraL
 	local gui = _G._tetra_stageGui
@@ -78356,7 +78356,7 @@ end
 
 
 ]=],
-    ["ui/selectDropdown"] = [=[
+    ["ui/selectDropdown"] = [[=[
 return function(env, parent, yOff, zBase, opts)
 local C = env.C
 local createInstance = env.createInstance
@@ -78578,7 +78578,7 @@ end
 
 
 ]=],
-    ["ui/slider"] = [=[
+    ["ui/slider"] = [[=[
 return function(env, parent, label, initial, minimum, maximum, onChange, formatValue)
 local createInstance = env.createInstance
  local cfg=_G._tetra_cfg
@@ -78658,7 +78658,7 @@ end
 
 
 ]=],
-    ["ui/styles"] = [=[
+    ["ui/styles"] = [[=[
 return function(env)
 local _tetraL = env._tetraL
 local createInstance = env.createInstance
@@ -78787,7 +78787,7 @@ end
 
 
 ]=],
-    ["ui/tabDock"] = [=[
+    ["ui/tabDock"] = [[=[
 return function(env)
 local _tetraL = env._tetraL
 local createInstance = env.createInstance
@@ -79675,7 +79675,7 @@ end
 
 
 ]=],
-    ["ui/teamDropdown"] = [=[
+    ["ui/teamDropdown"] = [[=[
 return function(env, parent, yOff, zBase, onHeight)
 local C = env.C
 local createInstance = env.createInstance
@@ -79818,7 +79818,7 @@ end
 
 
 ]=],
-    ["ui/themePresets"] = [=[
+    ["ui/themePresets"] = [[=[
 return function(env)
 local C = env.C
 local createInstance = env.createInstance
@@ -80294,7 +80294,7 @@ end
 
 
 ]=],
-    ["ui/themes"] = [=[
+    ["ui/themes"] = [[=[
 return function(env)
 local C = env.C
 local _tetraClear = env._tetraClear
@@ -80832,7 +80832,7 @@ end
 
 
 ]=],
-    ["ui/widgets"] = [=[
+    ["ui/widgets"] = [[=[
 return function(env)
 local C = env.C
 local _tetraL = env._tetraL
@@ -82272,7 +82272,7 @@ end
 
 
 ]=],
-    ["ui/windows"] = [=[
+    ["ui/windows"] = [[=[
 return function(env)
 local tween = env.tween
 	local W = {file = "Tetra/windows.json", panels = setmetatable({}, {__mode = "k"}), pending = {}}
@@ -82480,7 +82480,7 @@ end
 
 
 ]=],
-    ["WindUI"] = [=[
+    ["WindUI"] = [[=[
 --[[
      _      ___         ____  ______
     | | /| / (_)__  ___/ / / / /  _/
