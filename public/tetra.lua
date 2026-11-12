@@ -1,1 +1,0 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/MaxByDuora/tetra/main/tetra.lua"))()
