@@ -83,11 +83,7 @@ if allCmdSrc then
         local ok2, cmdMod = pcall(allCmdFn)
         if ok2 and type(cmdMod) == "function" then
             pcall(function() cmdMod(env) end)
-        else
-            warn("Tetra: failed to execute all_commands.luau: " .. tostring(cmdMod))
         end
-    else
-        warn("Tetra: failed to compile all_commands.luau: " .. tostring(fn))
     end
 end
 
@@ -130,7 +126,7 @@ local Window = WindUI:CreateWindow({
 })
 Tetra.Window = Window
 
--- Load tabs using loadModule (they are .luau text files, not ModuleScripts)
+-- Load tabs using module loader
 local homeFn = loadModule("tabs/home")
 if homeFn then
     pcall(homeFn({ _tetra = Tetra, kit = WindUI, tab = Window:Tab({ Title = "Home", Icon = "home" }), window = Window, windui = WindUI }))
