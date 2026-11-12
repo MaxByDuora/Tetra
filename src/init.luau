@@ -15,132 +15,94 @@ local LocalPlayer = Players.LocalPlayer
 if not LocalPlayer then
     LocalPlayer = Players.LocalPlayerAdded:Wait()
 end
-local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 
-local Tetra = {
-    version = "1.0",
-    lp = LocalPlayer,
-    playerGui = PlayerGui,
-    coreGui = CoreGui,
-    config = {
-        theme = "Liquid",
-        transparent = true,
-        notifyEnabled = true,
-        autoExecEnabled = true,
-        toggleKey = Enum.KeyCode.RightShift,
-        musicVolume = 0.5,
-        musicSource = "soundcloud",
-    },
-    binds = {},
-    Window = nil,
-    WindUI = nil,
-    configs = nil,
-    fly = nil,
-    esp = nil,
-    musicplayer = nil,
-}
+-- Build environment
+local env = {}
+env.players = Players
+env.lp = LocalPlayer
+env.runService = RunService
+env.userInputService = UserInputService
+env.tweenService = TweenService
+env.coreGui = CoreGui
+env.workspace = workspace
+env.lighting = game:GetService("Lighting")
+env.starterGui = game:GetService("StarterGui")
+env.teleportService = TeleportService
+env.soundService = game:GetService("SoundService")
+env.replicatedStorage = game:GetService("ReplicatedStorage")
+env.mouse = LocalPlayer:GetMouse()
+env._nvL = { lp = LocalPlayer }
+env.C = {}
+env._cs = {}
 
-function Tetra.notify(title, text, duration)
-    if not Tetra.config.notifyEnabled then return end
-    if Tetra.WindUI then
-        Tetra.WindUI:Notify({
-            Title = title or "Tetra",
-            Text = text or "",
-            Duration = duration or 5,
-        })
+local function findPlayers(query)
+    if type(query) ~= "string" or query == "" then return {} end
+    local q = query:lower()
+    local out = {}
+    for _, p in ipairs(Players:GetPlayers()) do
+        local name = p.Name:lower()
+        local display = p.DisplayName:lower()
+        if name == q or display == q or name:find(q, 1, true) or display:find(q, 1, true) then
+            out[#out + 1] = p
+        end
     end
+    return out
 end
+env.findPlayers = findPlayers
 
-function Tetra.execCmd(name, parts)
-    parts = parts or { name }
-    local cmdReg = _G._tetra_cmdReg or {}
-    for _, c in ipairs(cmdReg) do
-        if c.name == name then
-            local ok, ret = pcall(c.exec, parts)
-            return ret
-        end
-        for _, a in ipairs(c.aliases or {}) do
-            if a == name then
-                local ok, ret = pcall(c.exec, parts)
-                return ret
-            end
-        end
+function env.safeHttpGet(url)
+    if type(url) ~= "string" then return nil end
+    local low = url:lower()
+    if low:find("soundcloud") or low:find("sc-") then
+        local ok, res = pcall(function() return game:HttpGet(url) end)
+        if ok then return res end
     end
-    Tetra:notify("Commands", "Unknown command: " .. tostring(name), 4)
-    return false
-end
-
-_G.Tetra = Tetra
-
--- Load core boot module using loadfile+loadstring
-local function loadModule(relativePath)
-    local path = "src/" .. relativePath .. ".luau"
-    local ok, src = pcall(readfile, path)
-    if ok and type(src) == "string" and src ~= "" then
-        local fn, err = loadstring(src, "=" .. path)
-        if fn then
-            return fn
-        else
-            warn("Tetra: failed to compile " .. path .. ": " .. tostring(fn))
-            return nil
-        end
-    end
-    warn("Tetra: module not found: " .. path)
     return nil
 end
 
--- Boot module
-local bootFn = loadModule("core/boot")
-local env = {}
-if bootFn then
-    env = bootFn(env) -- boot returns env
+function env.safeLoadstring(src)
+    if type(src) ~= "string" then return nil end
+    return loadstring(src)
 end
-Tetra.env = env
 
--- Ensure env has everything
-env._tetra = Tetra
-env.reg = env.reg or function(name, desc, args, aliases, fn)
-    if type(aliases) == "function" then
-        fn = aliases
-        aliases = {}
-        ui = fn
-    elseif type(fn) == "table" then
-        ui = fn
-        fn = aliases
-        aliases = {}
+-- Load module from src/<name>.luau
+local function loadModule(name)
+    local path = "src/" .. name .. ".luau"
+    local ok, src = pcall(readfile, path)
+    if ok and type(src) == "string" and src ~= "" then
+        return loadstring(src, "=" .. name)
     end
-    aliases = aliases or {}
-    if type(aliases) ~= "table" then aliases = {aliases} end
-    ui = ui or {}
-    local entry = {
-        name = name,
-        desc = desc or "",
-        args = args or "",
-        aliases = aliases,
-        exec = fn,
-        ui = ui,
-    }
-    table.insert(_G._tetra_cmdReg or {}, entry)
-    return entry
+    return nil
 end
-_G._tetra_cmdReg = _G._tetra_cmdReg or {}
+
+-- Load all commands from all_commands.luau
+local allCmdSrc = loadfile("src/commands/all_commands.luau")
+if allCmdSrc then
+    local allCmdFn = loadstring(allCmdSrc, "=cmds/all_commands")
+    if allCmdFn then
+        local ok2, cmdMod = pcall(allCmdFn)
+        if ok2 and type(cmdMod) == "function" then
+            pcall(function() cmdMod(env) end)
+        end
+    end
+end
+
+-- Load boot module
+local bootFn = loadModule("core/boot")
+if bootFn then
+    local bootTable = bootFn()
+    env = boot.initEnv(env)
+end
 
 -- Load configs module
 local configsFn = loadModule("core/configs")
 if configsFn then
-    local configs = configsFn({ _tetra = Tetra, HttpService = HttpService })
-    Tetra.configs = configs
+    Tetra.configs = configsFn({ _tetra = Tetra, HttpService = env.httpService })
 end
 
--- Load official WindUI library
+-- Load WindUI library
 local winduiFn = loadModule("lib/WindUI")
-local WindUI
-if winduiFn then
-    WindUI = winduiFn()
-else
-    -- Fallback: try require if WindUI is a ModuleScript
-    WindUI = require(script:WaitForChild("lib"):WaitForChild("WindUI"))
-end
+local WindUI = winduiFn()
 Tetra.WindUI = WindUI
 
 -- Create main window
@@ -165,107 +127,50 @@ local Window = WindUI:CreateWindow({
 })
 Tetra.Window = Window
 
--- Register tabs
-local homeTab = Window:Tab({ Title = "Home", Icon = "home" })
-local settingsTab = Window:Tab({ Title = "Settings", Icon = "settings" })
-local commandsTab = Window:Tab({ Title = "Commands", Icon = "list" })
-local musicTab = Window:Tab({ Title = "Music", Icon = "music" })
-local playersTab = Window:Tab({ Title = "Players", Icon = "users" })
+-- Load tabs using loadModule (files are .luau text files, not ModuleScripts)
+local homeFn = loadModule("tabs/home")
+if homeFn then
+    pcall(homeFn({ _tetra = Tetra, kit = WindUI, tab = homeTab, window = Window, windui = WindUI }))
+end
 
--- Load tabs
-require(script:WaitForChild("tabs"):WaitForChild("home"))({
-    _tetra = Tetra,
-    kit = WindUI,
-    tab = homeTab,
-    window = Window,
-    windui = WindUI,
-})
+local settingsFn = loadModule("tabs/settings")
+if settingsFn then
+    pcall(settingsFn({ _tetra = Tetra, kit = WindUI, configs = Tetra.configs, tab = settingsTab, window = Window, windui = WindUI }))
+end
 
-require(script:WaitForChild("tabs"):WaitForChild("settings"))({
-    _tetra = Tetra,
-    kit = WindUI,
-    configs = configs,
-    tab = settingsTab,
-    window = Window,
-    windui = WindUI,
-})
+local commandsFn = loadModule("tabs/commands")
+if commandsFn then
+    pcall(commandsFn({ _tetra = Tetra, kit = WindUI, tab = commandsTab, window = Window, windui = WindUI }))
+end)
 
-require(script:WaitForChild("tabs"):WaitForChild("commands"))({
-    _tetra = Tetra,
-    kit = WindUI,
-    tab = commandsTab,
-    window = Window,
-    windui = WindUI,
-})
+local musicFn = loadModule("tabs/music")
+if musicFn then
+    pcall(musicFn({ _tetra = Tetra, kit = WindUI, tab = musicTab, window = Window, windui = WindUI }))
+end)
 
-require(script:WaitForChild("tabs"):WaitForChild("music"))({
-    _tetra = Tetra,
-    kit = WindUI,
-    tab = musicTab,
-    window = Window,
-    windui = WindUI,
-})
-
-require(script:WaitForChild("tabs"):WaitForChild("players"))({
-    _tetra = Tetra,
-    kit = WindUI,
-    tab = playersTab,
-    window = Window,
-    windui = WindUI,
-})
+local playersFn = loadModule("tabs/players")
+if playersFn then
+    pcall(playersFn({ _tetra = Tetra, kit = WindUI, tab = playersTab, window = Window, windui = WindUI }))
+end)
 
 -- Load features
-local flyMod = require(script:WaitForChild("features"):WaitForChild("fly"))
-Tetra.fly = flyMod({
-    _tetra = Tetra,
-    kit = WindUI,
-    configs = configs,
-    windui = WindUI,
-})
+local flyMod = loadModule("features/fly")
+if flyMod then
+    Tetra.fly = flyMod({ _tetra = Tetra, kit = WindUI, configs = Tetra.configs, windui = WindUI })
+end
 
-local espMod = require(script:WaitForChild("features"):WaitForChild("esp"))
-Tetra.esp = espMod({
-    _tetra = Tetra,
-    kit = WindUI,
-    configs = configs,
-    windui = WindUI,
-})
+local espMod = loadModule("features/esp")
+if espMod then
+    Tetra.esp = espMod({ _tetra = Tetra, kit = WindUI, configs = Tetra.configs, windui = WindUI })
+end
 
 -- Load music player
-local musicplayer = require(script:WaitForChild("music"):WaitForChild("musicplayer"))
-Tetra.musicplayer = musicplayer
+local musicplayer = loadModule("music/musicplayer")
+if musicplayer then
+    Tetra.musicplayer = musicplayer({ _tetra = Tetra, kit = WindUI, configs = Tetra.configs, windui = WindUI })
+end
 
--- Load all commands from single file
-task.defer(function()
-    if Tetra.config.autoExecEnabled then
-        local allCmdFile = "src/commands/all_commands.luau"
-        local ok, src = pcall(readfile, allCmdFile)
-        if ok and type(src) == "string" and src ~= "" then
-            local fn, err = loadstring(src, "=cmds/all_commands")
-            if fn then
-                local ok2, cmdMod = pcall(fn)
-                if ok2 and type(cmdMod) == "function" then
-                    pcall(function() cmdMod(env) end)
-                    local cmdCount = _G._tetra_cmdReg and #_G._tetra_cmdReg or 0
-                    _tetra:notify("Tetra", "Loaded " .. cmdCount .. " commands", 5)
-                    _G._tetra_cmdCount = cmdCount
-                else
-                    warn("Tetra: failed to execute all_commands.luau: " .. tostring(cmdMod))
-                end
-            else
-                warn("Tetra: failed to compile all_commands.luau: " .. tostring(fn))
-            end
-        else
-            _tetra:notify("Tetra", "Commands folder not found", 5)
-        end
-    end
-end)
-
-task.delay(1, function()
-    if Tetra.config.notifyEnabled then
-        Tetra:notify("Tetra", "Liquid glass hub loaded — ready", 5)
-    end
-end)
+_tetra:notify("Tetra", "Hub loaded — " .. tostring(#_G._tetra_cmdReg or 0) .. " commands ready", 5)
 
 Window:Toggle()
 return Tetra
