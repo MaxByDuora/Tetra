@@ -1,41 +1,50 @@
 --[[
-    Tetra v1.0 — Custom Liquid Glass Hub
-    Entry point (run tetra.lua directly in your executor)
-    Uses official WindUI library
+    Tetra v1.0 - Loader
+    Run: loadstring(game:HttpGet("YOUR_RAW_GITHUB_URL/tetra.lua"))()
+    
+    Setup:
+    1. Push this folder to GitHub
+    2. Change GITHUB_RAW below to your repo URL
+    3. Run loadstring(game:HttpGet("YOUR_RAW_GITHUB_URL/tetra.lua"))() in your executor
 ]]
 
+-- CONFIGURE THIS
+local GITHUB_RAW = "https://raw.githubusercontent.com/MaxByDuora/tetra/main/src/"
+
+-- Build environment
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
-local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
 local CoreGui = game:GetService("CoreGui")
 local HttpService = game:GetService("HttpService")
+local TeleportService = game:GetService("TeleportService")
 
 local LocalPlayer = Players.LocalPlayer
 if not LocalPlayer then
     LocalPlayer = Players.LocalPlayerAdded:Wait()
 end
 
--- Build environment
-local env = {}
-env.players = Players
-env.lp = LocalPlayer
-env.runService = RunService
-env.userInputService = UserInputService
-env.tweenService = TweenService
-env.coreGui = CoreGui
-env.workspace = workspace
-env.lighting = game:GetService("Lighting")
-env.starterGui = game:GetService("StarterGui")
-env.teleportService = TeleportService
-env.soundService = game:GetService("SoundService")
-env.replicatedStorage = game:GetService("ReplicatedStorage")
-env.mouse = LocalPlayer:GetMouse()
-env._nvL = { lp = LocalPlayer }
-env.C = {}
-env._cs = {}
+local env = {
+    players = Players,
+    lp = LocalPlayer,
+    runService = RunService,
+    userInputService = UserInputService,
+    tweenService = TweenService,
+    coreGui = CoreGui,
+    workspace = workspace,
+    lighting = game:GetService("Lighting"),
+    starterGui = game:GetService("StarterGui"),
+    teleportService = TeleportService,
+    soundService = game:GetService("SoundService"),
+    replicatedStorage = game:GetService("ReplicatedStorage"),
+    mouse = LocalPlayer:GetMouse(),
+    _nvL = { lp = LocalPlayer },
+    C = {},
+    _cs = {},
+}
 
-local function findPlayers(query)
+function env.findPlayers(query)
     if type(query) ~= "string" or query == "" then return {} end
     local q = query:lower()
     local out = {}
@@ -48,7 +57,6 @@ local function findPlayers(query)
     end
     return out
 end
-env.findPlayers = findPlayers
 
 function env.safeHttpGet(url)
     if type(url) ~= "string" then return nil end
@@ -65,14 +73,31 @@ function env.safeLoadstring(src)
     return loadstring(src)
 end
 
--- Load module from src/<name>.luau
-local function loadModule(name)
-    local path = "src/" .. name .. ".luau"
-    local ok, src = pcall(readfile, path)
-    if ok and type(src) == "string" and src ~= "" then
-        return loadstring(src, "=" .. name)
+-- Command registry
+_G._tetra_cmdReg = _G._tetra_cmdReg or {}
+function env.reg(name, desc, args, aliases, fn, ui)
+    if type(aliases) == "function" then
+        fn = aliases
+        aliases = {}
+        ui = fn
+    elseif type(fn) == "table" then
+        ui = fn
+        fn = aliases
+        aliases = {}
     end
-    return nil
+    aliases = aliases or {}
+    if type(aliases) ~= "table" then aliases = {aliases} end
+    ui = ui or {}
+    local entry = {
+        name = name,
+        desc = desc or "",
+        args = args or "",
+        aliases = aliases,
+        exec = fn,
+        ui = ui,
+    }
+    table.insert(_G._tetra_cmdReg, entry)
+    return entry
 end
 
 -- Load all commands from all_commands.luau
@@ -89,18 +114,16 @@ end
 
 -- Load boot module
 local bootFn = loadModule("core/boot")
-if bootFn then
-    local bootTable = bootFn()
-    env = boot.initEnv(env)
-end
+local env2 = bootFn(env)
+Tetra.env = env
 
--- Load configs module
+-- Load configs
 local configsFn = loadModule("core/configs")
 if configsFn then
-    Tetra.configs = configsFn({ _tetra = Tetra, HttpService = env.httpService })
+    Tetra.configs = configsFn({ _tetra = Tetra, HttpService = HttpService })
 end
 
--- Load WindUI library
+-- Load WindUI
 local winduiFn = loadModule("lib/WindUI")
 local WindUI = winduiFn()
 Tetra.WindUI = WindUI
@@ -127,50 +150,87 @@ local Window = WindUI:CreateWindow({
 })
 Tetra.Window = Window
 
--- Load tabs using loadModule (files are .luau text files, not ModuleScripts)
-local homeFn = loadModule("tabs/home")
-if homeFn then
-    pcall(homeFn({ _tetra = Tetra, kit = WindUI, tab = homeTab, window = Window, windui = WindUI }))
-end
+-- Load tabs
+local homeTab = Window:Tab({ Title = "Home", Icon = "home" })
+local settingsTab = Window:Tab({ Title = "Settings", Icon = "settings" })
+local commandsTab = Window:Tab({ Title = "Commands", Icon = "list" })
+local musicTab = Window:Tab({ Title = "Music", Icon = "music" })
+local playersTab = Window:Tab({ Title = "Players", Icon = "users" })
 
-local settingsFn = loadModule("tabs/settings")
-if settingsFn then
-    pcall(settingsFn({ _tetra = Tetra, kit = WindUI, configs = Tetra.configs, tab = settingsTab, window = Window, windui = WindUI }))
-end
+require(script:WaitForChild("tabs"):WaitForChild("home"))({
+    _tetra = Tetra,
+    kit = WindUI,
+    tab = homeTab,
+    window = Window,
+    windui = WindUI,
+})
 
-local commandsFn = loadModule("tabs/commands")
-if commandsFn then
-    pcall(commandsFn({ _tetra = Tetra, kit = WindUI, tab = commandsTab, window = Window, windui = WindUI }))
-end)
+require(script:WaitForChild("tabs"):WaitForChild("settings"))({
+    _tetra = Tetra,
+    kit = WindUI,
+    configs = configs,
+    tab = settingsTab,
+    window = Window,
+    windui = WindUI,
+})
 
-local musicFn = loadModule("tabs/music")
-if musicFn then
-    pcall(musicFn({ _tetra = Tetra, kit = WindUI, tab = musicTab, window = Window, windui = WindUI }))
-end)
+require(script:WaitForChild("tabs"):WaitForChild("commands"))({
+    _tetra = Tetra,
+    kit = WindUI,
+    tab = commandsTab,
+    window = Window,
+    windui = WindUI,
+})
 
-local playersFn = loadModule("tabs/players")
-if playersFn then
-    pcall(playersFn({ _tetra = Tetra, kit = WindUI, tab = playersTab, window = Window, windui = WindUI }))
-end)
+require(script:WaitForChild("tabs"):WaitForChild("music"))({
+    _tetra = Tetra,
+    kit = WindUI,
+    tab = musicTab,
+    window = Window,
+    windui = WindUI,
+})
+
+require(script:WaitForChild("tabs"):WaitForChild("players"))({
+    _tetra = Tetra,
+    kit = WindUI,
+    tab = playersTab,
+    window = Window,
+    windui = WindUI,
+})
 
 -- Load features
 local flyMod = loadModule("features/fly")
 if flyMod then
-    Tetra.fly = flyMod({ _tetra = Tetra, kit = WindUI, configs = Tetra.configs, windui = WindUI })
+    Tetra.fly = flyMod({
+        _tetra = Tetra,
+        kit = WindUI,
+        configs = Tetra.configs,
+        windui = WindUI,
+    })
 end
 
 local espMod = loadModule("features/esp")
 if espMod then
-    Tetra.esp = espMod({ _tetra = Tetra, kit = WindUI, configs = Tetra.configs, windui = WindUI })
+    Tetra.esp = espMod({
+        _tetra = Tetra,
+        kit = WindUI,
+        configs = Tetra.configs,
+        windui = WindUI,
+    })
 end
 
 -- Load music player
 local musicplayer = loadModule("music/musicplayer")
 if musicplayer then
-    Tetra.musicplayer = musicplayer({ _tetra = Tetra, kit = WindUI, configs = Tetra.configs, windui = WindUI })
+    Tetra.musicplayer = musicplayer({
+        _tetra = Tetra,
+        kit = WindUI,
+        configs = Tetra.configs,
+        windui = WindUI,
+    })
 end
 
-_tetra:notify("Tetra", "Hub loaded — " .. tostring(#_G._tetra_cmdReg or 0) .. " commands ready", 5)
+_tetra:notify("Tetra", "Hub loaded - " .. tostring(#_G._tetra_cmdReg or 0) .. " commands ready", 5)
 
 Window:Toggle()
 return Tetra
