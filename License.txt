@@ -1,0 +1,109 @@
+/$$$$$$$$          /$$                       
+|__  $$__/         | $$                       
+   | $$  /$$$$$$  /$$$$$$    /$$$$$$  /$$$$$$ 
+   | $$ /$$__  $$|_  $$_/   /$$__  $$|____  $$
+   | $$| $$$$$$$$  | $$    | $$  \__/ /$$$$$$$
+   | $$| $$_____/  | $$ /$$| $$      /$$__  $$
+   | $$|  $$$$$$$  |  $$$$/| $$     |  $$$$$$$
+   |__/ \_______/   \___/  |__/      \_______/
+
+TETRA PROPRIETARY LICENSE
+Version 1.0, November 11, 2026
+
+Copyright (c) 2026 uora. All Rights Reserved.
+
+================================================================================
+                          ALL RIGHTS RESERVED
+================================================================================
+
+NOTICE: This software, its source code, object code, documentation, assets,
+and all associated files (collectively, the "Software") are the exclusive
+proprietary property of Tetra and are protected by copyright law and
+international copyright treaties, as well as other intellectual property
+laws and treaties.
+
+================================================================================
+                         RESTRICTIONS ON USE
+================================================================================
+
+NO PERMISSION IS GRANTED — either expressly or by implication, estoppel, or
+otherwise — to any person or entity to:
+
+  1. USE the Software, in whole or in part, for any purpose whatsoever,
+     whether commercial or non-commercial;
+
+  2. COPY, REPRODUCE, or DUPLICATE the Software or any portion thereof;
+
+  3. MODIFY, ADAPT, ALTER, TRANSLATE, or create DERIVATIVE WORKS based upon
+     the Software;
+
+  4. MERGE the Software with any other software or project;
+
+  5. DISTRIBUTE, PUBLISH, SUBLICENSE, SELL, TRANSFER, or otherwise make the
+     Software available to any third party;
+
+  6. REVERSE ENGINEER, DECOMPILE, DISASSEMBLE, or attempt to derive the
+     source code, algorithms, or structure of the Software;
+
+  7. REMIX, SAMPLE, or INCORPORATE any portion of the Software into any
+     other work, product, or project;
+
+  8. RENT, LEASE, or LEND the Software;
+
+  9. REMOVE, OBSCURE, or ALTER any proprietary notices, labels, or marks
+     on or in the Software;
+
+ 10. USE the Software to develop any competing product or service.
+
+================================================================================
+                          NO IMPLIED LICENSE
+================================================================================
+
+The absence of a specific restriction does not constitute a grant of
+permission. Any use of the Software not expressly authorized under a separate
+written agreement signed by an authorized representative of Tetra is strictly
+prohibited and constitutes an infringement of Tetra's intellectual property
+rights.
+
+================================================================================
+                         OWNERSHIP & RESERVATION
+================================================================================
+
+Tetra retains all right, title, and interest in and to the Software,
+including all intellectual property rights therein. Nothing in this License
+transfers ownership of any intellectual property rights in or to the Software.
+
+All rights not expressly granted herein are reserved by Duora.
+
+================================================================================
+                              ENFORCEMENT
+================================================================================
+
+Any unauthorized use, reproduction, distribution, or other exploitation of
+the Software may result in severe civil and criminal penalties and will be
+prosecuted to the maximum extent permitted under applicable law.
+
+If you believe you have a legitimate business need for access to the Software,
+please contact Tetra directly to inquire about licensing options.
+
+================================================================================
+                           DISCLAIMER OF WARRANTIES
+================================================================================
+
+THE SOFTWARE IS PROVIDED "AS IS," WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED. IN NO EVENT SHALL TETRA BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+LIABILITY ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE
+USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+================================================================================
+                            GOVERNING LAW
+================================================================================
+
+This License shall be governed by and construed in accordance with applicable
+law, without regard to conflict of law principles.
+
+================================================================================
+
+For licensing inquiries, contact: MaxByDuora@gmail.com
+
+Copyright (c) 2026 Duora. All Rights Reserved.
